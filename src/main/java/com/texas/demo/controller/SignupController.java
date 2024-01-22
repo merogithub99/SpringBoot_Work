@@ -1,3 +1,4 @@
+
 package com.texas.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class SignupController {
 		return "signup";
 		
 	}
+	
 	@PostMapping("/signup")
 	public String postSignup(@ModelAttribute User user ) {
 		user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
