@@ -15,27 +15,30 @@ import com.texas.demo.repository.UserRepository;
 public class LoginController {
 	@Autowired
 	private UserRepository userRepo;
-	
 
-	@GetMapping("/login")
+	@GetMapping({ "/login", "/" })
 	public String getLogin() {
 		return "login";
 	}
-	
+
 	@PostMapping("/login")
-	public String postLogin(@ModelAttribute User user,Model model) {
+	public String postLogin(@ModelAttribute User user, Model model) {
 		user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
 
-		User usr=userRepo.findByUnameAndPassword(user.getUname(), user.getPassword());
-		
-		
-		
-		if(usr!=null) {
-			model.addAttribute("uname",user.getUname());
+		User usr = userRepo.findByUnameAndPassword(user.getUname(), user.getPassword());
+
+		if (usr != null) {
+			model.addAttribute("uname", user.getUname());
 			return "home";
 		}
-		
-		model.addAttribute("message","user not found");
+
+		model.addAttribute("message", "user not found");
+		return "login";
+	}
+
+	@GetMapping("/logout")
+	public String logout() {
+
 		return "login";
 	}
 }
