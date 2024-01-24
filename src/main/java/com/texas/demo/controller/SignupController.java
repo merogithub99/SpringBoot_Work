@@ -13,22 +13,22 @@ import com.texas.demo.repository.UserRepository;
 
 @Controller
 public class SignupController {
-	
+
 	@Autowired
 	private UserRepository userRepo;
 
 	@GetMapping("/signup")
 	public String getSignup() {
 		return "signup";
-		
+
 	}
-	
+
 	@PostMapping("/signup")
-	public String postSignup(@ModelAttribute User user ) {
+	public String postSignup(@ModelAttribute User user) {
 		user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
-		
+		User usr = userRepo.findByUname(user.getUname());
+
 		userRepo.save(user);
-		
 		return "login";
 	}
 }

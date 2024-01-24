@@ -41,7 +41,7 @@ public class DepartmentController {
 	}
 
 	@GetMapping("/dept/delete")
-	public String delete(@RequestParam int id ) {
+	public String deleteDepartment(@RequestParam int id ) {
 		
 		deptService.deleteDepartment(id);
 

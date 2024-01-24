@@ -7,5 +7,6 @@ import com.texas.demo.model.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
 
 	User findByUnameAndPassword(String un,String psw);
+	User findByUname(String un);
 	
 }
